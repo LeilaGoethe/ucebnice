@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(49, 49, 49);
+    color: rgb(189, 189, 189);
+    max-height: 100%;
+}
+
+#nav {
+    width: 20%;
+    float: left;
+}
+
+nav ul {
+    padding: 1em;
+    font-family: RobotoBold;
+    font-size: 1.5em;
+}
+
+nav li {
+    padding: 0.5em;
+    list-style-type: none;
+    border-bottom: 2px rgb(189, 189, 189) solid;
+}
+
+
+nav li:hover {
+    color: rgb(121, 6, 113);
+    font-family: RobotoHover;
+    border-bottom: 2px rgb(121, 6, 113) solid;
+}
+
+nav h3 {
+    padding: 0.5em;
+    color: rgb(56, 3, 53);
+    font-family: RobotoHover;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+main {
+    background-color: white;
+    font-family: Roboto;
+    color: rgb(82, 82, 82);
+    width: 80%;
+    float: right;
+}
+
+#text {
+    margin: 0.7em 3em;
+    padding: 1.2em;
+}
+
+h2 {
+    margin: 0.7em 0.2em 0.2em 4em;
+    font-family: RobotoBold;
+    font-size: 2.3em;
+    color: rgb(121, 6, 113);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("fonts/Roboto-Thin.ttf");
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url("fonts/Roboto-Bold.ttf");
+}
+
+
+@font-face {
+    font-family: RobotoHover;
+    src: url("fonts/Roboto-BoldItalic.ttf");
+}
+

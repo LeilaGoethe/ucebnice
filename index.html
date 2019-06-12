@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Učebnice</title>
+        <meta charset="utf-8">
+        <link href="style.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+        <nav id="nav">
+            <ul>
+                <li id="css">CSS</li>
+                <li id="vanilla">Vanilla JS</li>
+                <li id="react">React</li>
+                <li id="data">Data Visualisation</li>
+                <li id="security">Information Security</li>
+                <li id="other">Ostatní</li>
+            </ul>
+            <h3>,,Hey you! You should produce, not consume!"</h3>
+        </nav>
+        <main id="main">
+            <h2>Title Goes Here</h2>
+            <section id="text">
+                <p>Some text goes here.
+                        A network protocol describes a style of communication over a network. There are protocols for sending email, for fetching email, for sharing files, or even for controlling computers that happen to be infected by malicious software. For example, a simple chat protocol might consist of one computer sending the bits that represent the text “CHAT?” to another machine and the other responding with “OK!” to confirm that it understands the protocol. They can then proceed to send each other strings of text, read the text sent by the other from the network, and display whatever they receive on their screens.
+
+
+                        To add content to the Web, all you need to do is connect a machine to the Internet, and have it listen on port 80, using the Hypertext Transfer Protocol (HTTP). This protocol allows other computers to request documents over the network.
+                        
+                        Https - encrypted HTTP
+                        
+                        Each machine connected to the Internet gets a unique IP address, which looks something like 37.187.37.82. You can use these directly as the server part of a URL. But lists of more or less random numbers are hard to remember and awkward to type, so you can instead register a domain name to point toward a specific machine or set of machines. I registered eloquentjavascript.net to point at the IP address of a machine I control and can thus use that domain name to serve web pages. 
+                        
+                        SANDBOXING = browsers limit the things a JS program may do, can't look at the files on your computer or modify anything not related to the wep page it was embedded in
+                        The hard part of sandboxing is allowing the programs enough room to be useful yet at the same time restricting them from doing anything dangerous. Lots of useful functionality, such as communicating with other servers or reading the content of the copy-paste clipboard, can also be used to do problematic, privacy-invading things. 
+                        DOM: ThisrepresentationofthedocumentisoneofthetoysthataJavaScript program has available in its sandbox. You can read from the model and also change it. It acts as a live data structure: when it is modified, the page on the screen is updated to reflect the changes. 
+                        
+                        BROWSERS:
+                        Mosaic --> Netscape --> Microsoft's Internet Explorer (velkej boss, který se nestaral o konkurenci? Hups) --> …
+                        Really bad compatibility, life was hard for people writing wep pages. :D
+                        Apple's Safari :D
+                        
+                        
+                        
+                        HTTP/1.1 200 OK Statuscodesstartingwitha2indicatethattherequestsucceeded. Codes starting with 4 mean there was something wrong with the request. 404 is probably the most famous HTTP status code—it means that the resource that was requested could not be found. Codes that start with 5 mean an error happened on the server and the request is not to blame. 
+                        
+                        Amoderatelycomplicatedwebsitecaneasilyincludeanywherefrom10 to 200 resources. To be able to fetch those quickly, browsers will make several requests simultaneously, rather than waiting for the responses one at a time. Such documents are always fetched using GET requests.
+                        
+                        
+                        URL encoding, uses a percent sign followed by two hexadecimal digits that encode the character code. In this case, 3F, which is 63 in decimal notation, is the code of a question mark character. JavaScript provides the encodeURIComponent and decodeURIComponent functions to encode and decode this format.
+                        console.log(encodeURIComponent("Hello & goodbye"));
+                         // → Hello%20%26%20goodbye 
+                        console.log(decodeURIComponent("Hello%20%26%20goodbye"));
+                         // → Hello & goodbye 
+                        
+                        // XMLHttpRequest
+                        The interface through which browser JavaScript can make HTTP requests
+                        Designed by Microsoft for IE, XML really popular format in the world of business software (a world where Microsoft has always been at home :D)
+                         Infact, itwassopopularthattheacronymXMLwastackedonto the front of the name of an interface for HTTP, which is in no way tied to XML. 
+                        --> when added to IE, it allowed us to do things with JS that had been so hard before!
+                            - Suggestions when the user was typing something into a text field
+                            - The script would send the text to the server over HTTP as the user typed! :)
+                        
+                        
+                        // sending a request
+                        To make a request, we create a request object with the XMLHttpRequest constructor, call its open and send methods
+                        
+                        var req = new XMLHttpRequest();
+                        req.open("GET", "example/data.txt", false);
+                        req.send(null); --> my nic odesílat nebudem, nazdar, naval data.txt! :D
+                        console.log(req.responseText); 
+                        // → This is the content of data.txt
+                        
+                         When the connection is bad, the server is slow, or the file is big, that might take quite a while. Worse, because no event handlers can fire while our program is suspended, the whole document will become unresponsive. If we pass true as the third argument to open, the request is asynchronous. This means that when we call send, the only thing that happensrightawayisthattherequestisscheduledtobesent. Ourprogram cancontinue, andthebrowserwilltakecareofthesendingandreceiving of data in the background. 
+                        
+                        // security 
+                        
+                        Making HTTP requests in web page scripts once again raises concerns about security. The person who controls the script might not have the same interests as the person on whose computer it is running. More specifically, if I visit themafia.org, I do not want its scripts to be able to make a request to mybank.com, using identifying information from my browser, with instructions to transfer all my money to some random mafia account.
+                        It is possible for websites to protect themselves against such attacks, but that requires effort, and many websites fail to do it. For this reason, browsers protect us by disallowing scripts to make HTTP requests to other domains (names such as themafia.org and mybank.com). 
+                        This can be an annoying problem when building systems that want to access several domains for legitimate reasons. Fortunately, servers can include a header like this in their response to explicitly indicate to browsers that it is okay for the request to come from other domains:
+                        Access-Control -Allow-Origin: *
+                        
+                        
+                        function backgroundReadFile(url, callback) { 
+                        var req = new XMLHttpRequest();
+                         req.open("GET", url, true); 
+                        req.addEventListener("load", function() { 
+                            if (req.status < 400) --> JESTLI VĚTŠÍ JAK 400 => INDICATING ERROR
+                                callback(req.responseText); 
+                                }); 
+                            req.send(null);  --> in case of error it does nothing --> that's not ideal --> loading page, guy sittting in front of the PC, still waiting wtf is going on :D, page is looking like it's still doing something :D
+                        } 
+                        LEPŠÍ: 
+                        
+                        else 
+                            callback(null, new Error("Request failed: " + req.statusText)); 
+                            });
+                            
+                             req.addEventListener("error", function() { 
+                                callback(null, new Error("Network error")); 
+                                }
+                            ); 
+                            req.send(null);
+                        } 
+                        We have added a handler for the "error" event, which will be signaled when the request fails entirely. We also call the callback function with an error argument when the request completes with a status code that indicates an error. 
+                        
+                        // Promise objects
+                         www.promisejs.org
+                            - For complicated projects it's hard to not forget for an error, allow an unexpected exception (wat) etc.. :D
+                        
+                        // security
+                        
+                        Data traveling over the Internet tends to follow a long, dangerous road. To get to its destination, it must hop through anything from coffee-shop Wi-Fi networks to networks controlled by various companies and states. At any point along its route it may be inspected or even modified.
+                        
+                        The secure HTTP protocol, whose URLs start with https://, wraps HTTP traffic in a way that makes it harder to read and tamper with. First,theclientverifiesthattheserveriswhoitclaimstobebyrequiring thatservertoprovethatithasacryptographiccertificateissuedbyacertificate authority that the browser recognizes. Next, all data going over the connection is encrypted in a way that should prevent eavesdropping and tampering. 
+                        Thus, when it works right, HTTPS prevents both the someone impersonating the website you were trying to talk to and the someone snooping on your communication. It is not perfect, and there have been various incidents where HTTPS failed because of forged or stolen certificates and broken software. Still, plain HTTP is trivial to mess with, whereas breaking HTTPS requires the kind of effort that only states or sophisticated criminal organizations can hope to make. 
+                        
+                         
+                        In this chapter, we saw that HTTP is a protocol for accessing resources over the Internet. A client sends a request, which contains a method (usually GET) and a path that identifies a resource. The server then decides what to do with the request and responds with a status code and a response body. Both requests and responses may contain headers that provide additional information. Browsers make GET requests to fetch the resources needed to display a web page. A web page may also contain forms, which allow information entered by the user to be sent along in the request made when the form is submitted. You will learn more about that in the next chapter. The interface through which browser JavaScript can make HTTP requests is called XMLHttpRequest. You can usually ignore the “XML” part of that name (but you still have to type it). There are two ways in which it can be used—synchronous, which blocks everything until the request finishes, and asynchronous, which requires an event handler to notice that the response came in. In almost all cases, asynchronous is preferable. Making a request looks like this:
+                        
+                </p>
+            </section>
+        </main>
+    </div>
+    <script src="main.js"></script>
+    </body>
+</html>
